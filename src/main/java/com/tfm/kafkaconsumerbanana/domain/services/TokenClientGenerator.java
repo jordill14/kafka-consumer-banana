@@ -14,6 +14,6 @@ public class TokenClientGenerator {
     }
 
     public String execute() {
-        return tokenClientRepository.getToken(new TokenData("bananas@bananas.com","Bananas12345$"));
+        return tokenClientRepository.getToken(new TokenData("banana@banana.com","Admin123$"));
     }
 }

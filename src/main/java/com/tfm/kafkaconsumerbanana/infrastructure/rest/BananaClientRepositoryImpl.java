@@ -3,10 +3,7 @@ package com.tfm.kafkaconsumerbanana.infrastructure.rest;
 import com.tfm.kafkaconsumerbanana.domain.BananaClientRepository;
 import com.tfm.kafkaconsumerbanana.domain.model.BananaBoxData;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
+import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
@@ -31,15 +28,17 @@ public class BananaClientRepositoryImpl implements BananaClientRepository {
 
         HttpEntity<BananaBoxData> entity = new HttpEntity<BananaBoxData>(bananaBoxData,headers);
 
-        String endpoint = "https://localhost:8181/bananas/addDataToBanana";
+        String endpoint = "http://localhost:3000/bananas/addDataToBanana";
 
-        this.restTemplate.exchange(endpoint, HttpMethod.POST, entity, BananaBoxData.class);
 
-        try {
-            this.restTemplate.exchange(endpoint, HttpMethod.POST, entity, BananaBoxData.class);
+        ResponseEntity<String> response = this.restTemplate.exchange(endpoint, HttpMethod.POST, entity, String.class);
+
+       /* try {
+            //ResponseEntity<String> response = this.restTemplate.exchange(endpoint, HttpMethod.POST, entity, String.class);
+            System.out.println((response));
         } catch (HttpClientErrorException | HttpServerErrorException e) {
             log.error("Cannot get the response from {}", endpoint, e);
             throw e;
-        }
+        }*/
     }
 }
