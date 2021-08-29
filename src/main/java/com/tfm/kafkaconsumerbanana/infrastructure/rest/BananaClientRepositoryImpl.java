@@ -9,6 +9,8 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.IOException;
+
 @Slf4j
 @Component
 public class BananaClientRepositoryImpl implements BananaClientRepository {
@@ -30,15 +32,13 @@ public class BananaClientRepositoryImpl implements BananaClientRepository {
 
         String endpoint = "http://localhost:3000/bananas/addDataToBanana";
 
+       try {
+           ResponseEntity<String> response = this.restTemplate.exchange(endpoint, HttpMethod.POST, entity, String.class);
 
-        ResponseEntity<String> response = this.restTemplate.exchange(endpoint, HttpMethod.POST, entity, String.class);
-
-       /* try {
-            //ResponseEntity<String> response = this.restTemplate.exchange(endpoint, HttpMethod.POST, entity, String.class);
-            System.out.println((response));
-        } catch (HttpClientErrorException | HttpServerErrorException e) {
-            log.error("Cannot get the response from {}", endpoint, e);
-            throw e;
-        }*/
+       } catch (HttpClientErrorException | HttpServerErrorException e) {
+           log.error("Cannot get the response from {}", endpoint, e);
+           throw e;
+       }
+       log.info("Banana box data sent correctly");
     }
 }

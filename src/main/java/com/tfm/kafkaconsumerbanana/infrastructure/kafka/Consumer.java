@@ -30,7 +30,7 @@ public class Consumer {
         String token = getToken.execute();
         bananaAddData.execute(message,token);
 
-        logger.info(String.format("#### -> Consumed message -> %s", "Falta info"));
+
 
     }
 

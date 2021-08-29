@@ -5,10 +5,10 @@ import com.tfm.kafkaconsumerbanana.application.dto.ResponseTokenData;
 import com.tfm.kafkaconsumerbanana.domain.TokenClientRepository;
 import com.tfm.kafkaconsumerbanana.domain.model.TokenData;
 import lombok.extern.slf4j.Slf4j;
-import net.minidev.json.JSONObject;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Objects;
@@ -34,13 +34,24 @@ public class TokenClientRepositoryImpl implements TokenClientRepository {
 
         String endpoint = "http://localhost:3000/users/login";
 
-        ResponseEntity<String> response = this.restTemplate.exchange(endpoint, HttpMethod.POST, entity, String.class);
+        ResponseEntity<String> response;
+        try {
+            response = this.restTemplate.exchange(endpoint, HttpMethod.POST, entity, String.class);
+        } catch (HttpClientErrorException | HttpServerErrorException e) {
+            log.error("Cannot get the response from {}", endpoint, e);
+            throw e;
+        }
+
+        if(Objects.requireNonNull(response.getBody()).isEmpty()){
+            return "";
+        }
+
         String responseBody= response.getBody();
         Gson g = new Gson();
         ResponseTokenData json = g.fromJson(responseBody, ResponseTokenData.class);
         String accessToken = json.getUser().getAccessToken();
-        System.out.println(accessToken);
+
         return accessToken;
-       // return Objects.requireNonNull(response.getBody()).getUser().getAccessToken();
+
     }
 }
