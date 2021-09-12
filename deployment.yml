@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: banana-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: banana-app
+  template:
+    metadata:
+      labels:
+        app: banana-app
+    spec:
+      containers:
+        - name: banana-app
+          image: coppimilo/mds:latest
+          ports:
+            - containerPort: 9090
