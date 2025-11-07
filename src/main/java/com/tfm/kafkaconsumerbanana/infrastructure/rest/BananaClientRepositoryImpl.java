@@ -1,6 +1,6 @@
 package com.tfm.kafkaconsumerbanana.infrastructure.rest;
 
-import com.tfm.kafkaconsumerbanana.domain.BananaClientRepository;
+import com.tfm.kafkaconsumerbanana.domain.ports.out.BananaClientRepository;
 import com.tfm.kafkaconsumerbanana.domain.model.BananaBoxData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.*;
@@ -8,8 +8,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
-
-import java.io.IOException;
 
 @Slf4j
 @Component

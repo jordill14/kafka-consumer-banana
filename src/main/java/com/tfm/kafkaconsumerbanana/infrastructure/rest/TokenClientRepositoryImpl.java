@@ -2,7 +2,7 @@ package com.tfm.kafkaconsumerbanana.infrastructure.rest;
 
 import com.google.gson.Gson;
 import com.tfm.kafkaconsumerbanana.application.dto.ResponseTokenData;
-import com.tfm.kafkaconsumerbanana.domain.TokenClientRepository;
+import com.tfm.kafkaconsumerbanana.domain.ports.out.TokenClientRepository;
 import com.tfm.kafkaconsumerbanana.domain.model.TokenData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.*;

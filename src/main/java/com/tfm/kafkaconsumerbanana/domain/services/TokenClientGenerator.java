@@ -1,10 +1,9 @@
 package com.tfm.kafkaconsumerbanana.domain.services;
 
-import com.tfm.kafkaconsumerbanana.domain.TokenClientRepository;
+import com.tfm.kafkaconsumerbanana.domain.ports.out.TokenClientRepository;
 import com.tfm.kafkaconsumerbanana.domain.model.TokenData;
-import org.springframework.stereotype.Component;
 
-@Component
+
 public class TokenClientGenerator {
 
     private final TokenClientRepository tokenClientRepository;

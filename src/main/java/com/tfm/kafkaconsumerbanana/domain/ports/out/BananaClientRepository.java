@@ -1,4 +1,4 @@
-package com.tfm.kafkaconsumerbanana.domain;
+package com.tfm.kafkaconsumerbanana.domain.ports.out;
 
 import com.tfm.kafkaconsumerbanana.domain.model.BananaBoxData;
 
